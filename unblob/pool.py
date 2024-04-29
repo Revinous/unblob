@@ -1,5 +1,5 @@
 import abc
-import multiprocessing as mp
+import billiard as mp
 import os
 import queue
 import sys
@@ -9,7 +9,7 @@ from typing import Any, Callable, Union
 
 from .logging import multiprocessing_breakpoint
 
-mp.set_start_method("fork")
+mp.set_start_method('fork', force=True)
 
 
 class PoolBase(abc.ABC):

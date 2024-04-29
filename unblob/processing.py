@@ -1,4 +1,4 @@
-import multiprocessing
+import billiard as multiprocessing
 import shutil
 from operator import attrgetter
 from pathlib import Path
