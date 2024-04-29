@@ -1,4 +1,4 @@
-import multiprocessing
+import billiard as multiprocessing
 
 import pytest
 

@@ -1,4 +1,4 @@
-import multiprocessing
+import billiard as multiprocessing
 import shutil
 from collections.abc import Iterable, Sequence
 from operator import attrgetter
