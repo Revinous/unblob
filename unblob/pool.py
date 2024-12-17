@@ -1,10 +1,6 @@
 import abc
-<<<<<<< HEAD
 import contextlib
-import multiprocessing as mp
-=======
 import billiard as mp
->>>>>>> 69a6d16 (updates)
 import os
 import queue
 import signal
@@ -15,7 +11,7 @@ from typing import Any, Callable, Union
 
 from .logging import multiprocessing_breakpoint
 
-mp.set_start_method('fork', force=True)
+mp.set_start_method("fork", force=True)
 
 
 class PoolBase(abc.ABC):
@@ -34,7 +30,7 @@ class PoolBase(abc.ABC):
     def start(self):
         pass
 
-    def close(self, *, immediate=False):  # noqa: ARG002
+    def close(self, *, immediate=False):
         with pools_lock:
             pools.remove(self)
 
@@ -57,7 +53,7 @@ class Queue(JoinableQueue):
         Based on ``multiprocessing.JoinableQueue.join``.
         """
         with self._cond:  # type: ignore
-            return self._unfinished_tasks._semlock._is_zero()  # type: ignore  # noqa: SLF001
+            return self._unfinished_tasks._semlock._is_zero()  # type: ignore
 
 
 class _Sentinel:
@@ -68,12 +64,10 @@ _SENTINEL = _Sentinel
 
 
 def _worker_process(handler, input_, output):
-    # Creates a new process group, making sure no signals are
-    # propagated from the main process to the worker processes.
+    # Creates a new process group, making sure no signals are propagated from the main process to the worker processes.
     os.setpgrp()
 
-    # Restore default signal handlers, otherwise workers would inherit
-    # them from main process
+    # Restore default signal handlers
     signal.signal(signal.SIGTERM, signal.SIG_DFL)
     signal.signal(signal.SIGINT, signal.SIG_DFL)
 
